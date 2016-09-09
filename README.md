@@ -1,7 +1,7 @@
 logrus_kinesis
 ====
 
-[![Build Status](https://travis-ci.org/evalphobia/logrus_kinesis.svg?branch=master)](https://travis-ci.org/evalphobia/logrus_kinesis) [![Coverage Status](https://coveralls.io/repos/evalphobia/logrus_sentry/badge.svg?branch=master&service=github)](https://coveralls.io/github/evalphobia/logrus_sentry?branch=master) [![codecov](https://codecov.io/gh/evalphobia/logrus_kinesis/branch/master/graph/badge.svg)](https://codecov.io/gh/evalphobia/logrus_kinesis)
+[![Build Status](https://travis-ci.org/evalphobia/logrus_kinesis.svg?branch=master)](https://travis-ci.org/evalphobia/logrus_kinesis) [![Coverage Status](https://coveralls.io/repos/evalphobia/logrus_kinesis/badge.svg?branch=master&service=github)](https://coveralls.io/github/evalphobia/logrus_kinesis?branch=master) [![codecov](https://codecov.io/gh/evalphobia/logrus_kinesis/branch/master/graph/badge.svg)](https://codecov.io/gh/evalphobia/logrus_kinesis)
  [![GoDoc](https://godoc.org/github.com/evalphobia/logrus_kinesis?status.svg)](https://godoc.org/github.com/evalphobia/logrus_kinesis)
 
 
