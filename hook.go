@@ -2,6 +2,7 @@ package logrus_kinesis
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/aws/aws-sdk-go/aws"
@@ -143,7 +144,9 @@ func (h *KinesisHook) getData(entry *logrus.Entry) []byte {
 			continue
 		}
 		if fn, ok := h.filters[k]; ok {
-			v = fn(v)
+			v = fn(v) // apply custom filter
+		} else {
+			v = formatData(v) // use default formatter
 		}
 		data[k] = v
 	}
@@ -153,6 +156,20 @@ func (h *KinesisHook) getData(entry *logrus.Entry) []byte {
 		return nil
 	}
 	return bytes
+}
+
+// formatData returns value as a suitable format.
+func formatData(value interface{}) (formatted interface{}) {
+	switch value := value.(type) {
+	case json.Marshaler:
+		return value
+	case error:
+		return value.Error()
+	case fmt.Stringer:
+		return value.String()
+	default:
+		return value
+	}
 }
 
 func stringPtr(str string) *string {

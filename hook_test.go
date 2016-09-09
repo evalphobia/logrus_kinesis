@@ -1,8 +1,10 @@
 package logrus_kinesis
 
 import (
+	"errors"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
@@ -253,6 +255,49 @@ func TestGetData(t *testing.T) {
 		assert.Equal(tt.expected, string(hook.getData(entry)), target)
 	}
 }
+
+func TestFormatData(t *testing.T) {
+	assert := assert.New(t)
+
+	// assertion types
+	var (
+		assertTypeInt    int
+		assertTypeString string
+		assertTypeTime   time.Time
+	)
+
+	tests := []struct {
+		name         string
+		value        interface{}
+		expectedType interface{}
+	}{
+		{"int", 13, assertTypeInt},
+		{"string", "foo", assertTypeString},
+		{"error", errors.New("this is a test error"), assertTypeString},
+		{"time_stamp", time.Now(), assertTypeTime},        // implements JSON marshaler
+		{"time_duration", time.Hour, assertTypeString},    // implements .String()
+		{"stringer", myStringer{}, assertTypeString},      // implements .String()
+		{"stringer_ptr", &myStringer{}, assertTypeString}, // implements .String()
+		{"not_stringer", notStringer{}, notStringer{}},
+		{"not_stringer_ptr", &notStringer{}, &notStringer{}},
+	}
+
+	for _, tt := range tests {
+		target := fmt.Sprintf("%+v", tt)
+
+		result := formatData(tt.value)
+		assert.IsType(tt.expectedType, result, target)
+	}
+}
+
+type myStringer struct{}
+
+func (myStringer) String() string { return "myStringer!" }
+
+type notStringer struct{}
+
+func (notStringer) String() {}
+
 func TestStringPtr(t *testing.T) {
 	assert := assert.New(t)
 
