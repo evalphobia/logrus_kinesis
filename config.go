@@ -9,6 +9,7 @@ import (
 
 const defaultRegion = "us-east-1"
 
+// Config has AWS settings.
 type Config struct {
 	AccessKey string
 	SecretKey string
@@ -16,6 +17,7 @@ type Config struct {
 	Endpoint  string
 }
 
+// AWSConfig creates *aws.Config object from the fields.
 func (c Config) AWSConfig() *aws.Config {
 	cred := c.awsCredentials()
 	awsConf := &aws.Config{
