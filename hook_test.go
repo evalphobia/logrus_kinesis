@@ -10,7 +10,7 @@ import (
 
 func TestNew(t *testing.T) {
 	assert := assert.New(t)
-	return
+	t.Skip("TODO: add some case for env and local credentials")
 
 	hook, err := New("test_stream", Config{})
 	assert.Error(err)
@@ -19,7 +19,7 @@ func TestNew(t *testing.T) {
 
 func TestNewWithAWSConfig(t *testing.T) {
 	assert := assert.New(t)
-	return
+	t.Skip("TODO: add some case")
 
 	hook, err := NewWithAWSConfig("test_stream", nil)
 	assert.Error(err)
