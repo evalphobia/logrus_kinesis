@@ -11,8 +11,8 @@ logrus_kinesis
 
 ```go
 import (
-    "github.com/Sirupsen/logrus"
     "github.com/evalphobia/logrus_kinesis"
+    "github.com/sirupsen/logrus"
 )
 
 func main() {
